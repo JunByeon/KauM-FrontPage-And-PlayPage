@@ -1,4 +1,4 @@
-package com.kaumusic.kaum
+package com.example.flo
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.flo.MainActivity
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
-import com.kaumusic.kaum.databinding.FragmentAlbumBinding
 
 class AlbumFragment : Fragment() {
     private lateinit var binding: FragmentAlbumBinding

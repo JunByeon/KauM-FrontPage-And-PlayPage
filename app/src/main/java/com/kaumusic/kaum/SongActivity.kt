@@ -1,4 +1,4 @@
-package com.kaumusic.kaum
+package com.example.flo
 
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -6,7 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.kaumusic.kaum.databinding.ActivitySongBinding
+import com.example.flo.databinding.ActivitySongBinding
+import com.google.gson.Gson
 
 class SongActivity : AppCompatActivity() {
 
@@ -22,12 +23,14 @@ class SongActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySongBinding.inflate(layoutInflater) // inflate = XML에 표기된 레이아웃을 메모리에 객체화해서 올리는 것
-        setContentView(binding.root) // XML의 layout의 내용을 맘대로 가져다 쓰기 위한 설정으로 binding.root는 layout의 위에를 가리킨다
+        binding = ActivitySongBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initPlayList()
         initSong()
         initClickListener()
+
+
     }
 
     override fun onPause() {
@@ -63,11 +66,11 @@ class SongActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.songMiniplayerIv.setOnClickListener {
+        binding.songMiniplayerIv.setOnClickListener {   // 재생버튼과 일시정지 버튼을 각각 눌렀을때 서로 바꿔주기
             setPlayerStatus(true)
         }
 
-        binding.songPauseIv.setOnClickListener {
+        binding.songPauseIv.setOnClickListener {// 재생버튼과 일시정지 버튼을 각각 눌렀을때 서로 바꿔주기
             setPlayerStatus(false)
         }
 
@@ -110,12 +113,12 @@ class SongActivity : AppCompatActivity() {
 
     private fun moveSong(direct: Int){
         if (nowPos + direct < 0){
-            Toast.makeText(this,"first song", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"first song",Toast.LENGTH_SHORT).show()
             return
         }
 
         if (nowPos + direct >= songs.size){
-            Toast.makeText(this,"last song", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"last song",Toast.LENGTH_SHORT).show()
             return
         }
 
