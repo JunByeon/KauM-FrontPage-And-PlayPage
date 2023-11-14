@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kaumusic.kaum.databinding.FragmentAlbumBinding
 
 class AlbumFragment : Fragment() {
     private lateinit var binding: FragmentAlbumBinding
 
+    private val information = arrayListOf("수록곡", "상세정보", "영상")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +25,12 @@ class AlbumFragment : Fragment() {
                 .commitAllowingStateLoss()
         }
 
+        val albumAdpter = AlbumVPAdapter(this)
+        binding.albumContentVp.adapter = albumAdpter
+        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp) {
+            tab, position ->
+            tab.text = information[position]
+        }.attach()
 
         return binding.root
     }
