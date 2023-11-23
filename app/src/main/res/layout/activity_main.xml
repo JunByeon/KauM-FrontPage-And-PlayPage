@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.kaumusic.kaum.MainActivity">
 
     <FrameLayout
         android:id="@+id/main_frm"
@@ -12,7 +12,9 @@
         android:layout_height="0dp"
 
         app:layout_constraintBottom_toTopOf="@id/main_player_cl"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-171dp" />
 
     <SeekBar
         android:id="@+id/main_miniplayer_progress_sb"
