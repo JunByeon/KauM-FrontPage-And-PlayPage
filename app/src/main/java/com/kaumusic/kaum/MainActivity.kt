@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -17,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,6 +60,8 @@ class MainActivity : AppCompatActivity() {
 
         val songDB = SongDatabase.getInstance(this)!!
 
+        showFragment(binding.mainNavView.id, HomeFragment())
+
         // 스레드를 지정하지 않으면 디폴트로 메인 스레드임
         // lifecycleScope: 엑티비티 수명주기에 반응하는 scope
         // DB 저장하는 부분만 io 쓰레드로 변경
@@ -90,6 +94,13 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerProgressSb.progress = (song.second * 100000) / song.playTime
     }
 
+    private fun showFragment(fragmentContainer: Int, fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(fragmentContainer, fragment)
+            commit()
+        }
+    }
+
     private fun inputDummySongs(){
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()
@@ -117,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                 200,
                 false,
                 "music_flu",
-                R.drawable.img_album_exp2,
+                R.drawable.img_album_exp3,
                 false,
             )
         )
@@ -130,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                 190,
                 false,
                 "music_butter",
-                R.drawable.img_album_exp,
+                R.drawable.img_album_exp4,
                 false,
             )
         )

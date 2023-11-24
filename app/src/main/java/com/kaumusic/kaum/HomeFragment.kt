@@ -38,6 +38,8 @@ class HomeFragment : Fragment() {
         Log.d("albumlist", albumDatas.toString())
 
 
+
+
         // 더미데이터랑 Adapter 연결
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
 
@@ -65,6 +67,8 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+
     private fun changeAlbumFragment(album: Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, AlbumFragment().apply {
