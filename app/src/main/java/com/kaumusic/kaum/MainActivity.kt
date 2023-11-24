@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.flo.SongActivity
 //import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -31,8 +33,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         inputDummySongs()
-//        inputDummyAlbums()
-        initBottomNavigation()
+//      inputDummyAlbums()
+        val navController
+                = binding.mainNavView.getFragment<NavHostFragment>().navController
+        binding.mainBnv.setupWithNavController(navController)
 
         binding.mainPlayerCl.setOnClickListener {
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
@@ -79,45 +83,6 @@ class MainActivity : AppCompatActivity() {
         return spf!!.getString("jwt", "")
     }
 
-
-    private fun initBottomNavigation() {
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, HomeFragment())
-            .commitAllowingStateLoss()
-
-        binding.mainBnv.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-
-                R.id.homeFragment -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, HomeFragment())
-                        .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
-                }
-
-//                R.id.lookFragment -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.main_frm, LookFragment())
-//                        .commitAllowingStateLoss()
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.searchFragment -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.main_frm, SearchFragment())
-//                        .commitAllowingStateLoss()
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.lockerFragment -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.main_frm, LockerFragment())
-//                        .commitAllowingStateLoss()
-//                    return@setOnItemSelectedListener true
-//                }
-            }
-            false
-        }
-    }
 
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniplayerTitleTv.text = song.title

@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
-
     private fun changeAlbumFragment(album: Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, AlbumFragment().apply {
