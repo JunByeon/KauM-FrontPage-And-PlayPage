@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/homeFragment2">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/homeFragment2"
+        android:id="@+id/homeFragment"
         android:name="com.kaumusic.kaum.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
@@ -15,7 +15,7 @@
             app:destination="@id/chartFragment" />
         <action
             android:id="@+id/action_homeFragment2_to_searchFragment2"
-            app:destination="@id/searchFragment2" />
+            app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_homeFragment2_to_myPlayListFragment"
             app:destination="@id/myPlayListFragment" />
@@ -23,19 +23,22 @@
     <fragment
         android:id="@+id/chartFragment"
         android:name="com.kaumusic.kaum.ChartFragment"
-        android:label="ChartFragment" >
+        android:label="ChartFragment"
+        tools:layout="@layout/fragment_chart">
         <action
             android:id="@+id/action_chartFragment_to_myListFragment"
             app:destination="@id/myListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment2"
+        android:id="@+id/searchFragment"
         android:name="com.kaumusic.kaum.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
     <fragment
         android:id="@+id/myPlayListFragment"
         android:name="com.kaumusic.kaum.MyPlayListFragment"
-        android:label="MyPlayListFragment" >
+        android:label="MyPlayListFragment"
+        tools:layout="@layout/fragment_my_play_list">
         <action
             android:id="@+id/action_myPlayListFragment_to_myListFragment"
             app:destination="@id/myListFragment" />
@@ -46,5 +49,6 @@
     <fragment
         android:id="@+id/myListFragment"
         android:name="com.kaumusic.kaum.MyListFragment"
-        android:label="MyListFragment" />
+        android:label="MyListFragment"
+        tools:layout="@layout/fragment_mylist"/>
 </navigation>

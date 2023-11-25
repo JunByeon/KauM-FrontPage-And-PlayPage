@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/main_bnv"
-        tools:layout="@layout/fragment_home" />
+        app:navGraph = "@navigation/nav_main" />
 
     <FrameLayout
         android:id="@+id/main_frm"
