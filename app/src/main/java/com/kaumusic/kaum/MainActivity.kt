@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_FLO)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        showFragment(binding.mainNavView.id, HomeFragment())
 
         inputDummySongs()
 //      inputDummyAlbums()
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SongActivity::class.java)
             startActivity(intent)
         }
-        setContentView(binding.root)
+
         Log.d("MAIN/JWT_TO_SERVER", getJwt().toString())
 
     }
@@ -59,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         val songId = spf.getInt("songId", 0)
 
         val songDB = SongDatabase.getInstance(this)!!
+
+
 
         // 스레드를 지정하지 않으면 디폴트로 메인 스레드임
         // lifecycleScope: 엑티비티 수명주기에 반응하는 scope
@@ -126,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 200,
                 false,
                 "music_flu",
-                R.drawable.img_album_exp3,
+                R.drawable.img_album_exp2,
                 false,
             )
         )
@@ -139,7 +143,7 @@ class MainActivity : AppCompatActivity() {
                 190,
                 false,
                 "music_butter",
-                R.drawable.img_album_exp4,
+                R.drawable.img_album_exp2,
                 false,
             )
         )
@@ -180,7 +184,7 @@ class MainActivity : AppCompatActivity() {
                 240,
                 false,
                 "music_bboom",
-                R.drawable.img_album_exp5,
+                R.drawable.img_album_exp2,
                 false,
             )
         )
