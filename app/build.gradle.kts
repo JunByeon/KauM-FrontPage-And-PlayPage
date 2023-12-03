@@ -50,6 +50,10 @@ dependencies {
     implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation ("androidx.appcompat:appcompat:1.2.0")
+    implementation ("androidx.appcompat:appcompat:latest-version")
+
+
 
 
     // roomDB

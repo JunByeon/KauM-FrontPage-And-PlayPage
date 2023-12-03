@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    private var song: Song = Song()
+    //    private var song: Song = Song()
     private var gson: Gson = Gson()
 
 
@@ -34,24 +34,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        showFragment(binding.mainNavView.id, HomeFragment())
-
-        inputDummySongs()
+//        showFragment(binding.mainNavView.id, HomeFragment())
+//
+//        inputDummySongs()
 //      inputDummyAlbums()
-        val navController
-                = binding.mainNavView.getFragment<NavHostFragment>().navController
+        val navController = binding.mainNavView.getFragment<NavHostFragment>().navController
         binding.mainBnv.setupWithNavController(navController)
 
         binding.mainPlayerCl.setOnClickListener {
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
-            editor.putInt("songId", song.id)
+//            editor.putInt("songId", song.id)
             editor.apply()
 
             val intent = Intent(this, SongActivity::class.java)
             startActivity(intent)
         }
 
-        Log.d("MAIN/JWT_TO_SERVER", getJwt().toString())
+//        Log.d("MAIN/JWT_TO_SERVER", getJwt().toString())
 
     }
 
@@ -63,13 +62,12 @@ class MainActivity : AppCompatActivity() {
         val songDB = SongDatabase.getInstance(this)!!
 
 
-
         // 스레드를 지정하지 않으면 디폴트로 메인 스레드임
         // lifecycleScope: 엑티비티 수명주기에 반응하는 scope
         // DB 저장하는 부분만 io 쓰레드로 변경
 
         lifecycleScope.launch {
-            song = if (songId == 0) {
+            val song = if (songId == 0) {
                 databaseScope.async { songDB.songDao().getSong(1) }.await()
             } else {
                 databaseScope.async { songDB.songDao().getSong(songId) }.await()
@@ -90,20 +88,27 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+//    private fun setMiniPlayer(song: Song) {
+//        binding.mainMiniplayerTitleTv.text = song.title
+//        binding.mainMiniplayerSingerTv.text = song.singer
+//        binding.mainMiniplayerProgressSb.progress = (song.second * 100000) / song.playTime
+//    }
+//
+//    private fun showFragment(fragmentContainer: Int, fragment: Fragment) {
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(fragmentContainer, fragment)
+//            commit()
+//        }
+//    }
+
+
     private fun setMiniPlayer(song: Song) {
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainMiniplayerProgressSb.progress = (song.second * 100000) / song.playTime
     }
 
-    private fun showFragment(fragmentContainer: Int, fragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
-            replace(fragmentContainer, fragment)
-            commit()
-        }
-    }
-
-    private fun inputDummySongs(){
+    private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()
 
@@ -143,7 +148,7 @@ class MainActivity : AppCompatActivity() {
                 190,
                 false,
                 "music_butter",
-                R.drawable.img_album_exp2,
+                R.drawable.img_album_exp,
                 false,
             )
         )
@@ -184,7 +189,7 @@ class MainActivity : AppCompatActivity() {
                 240,
                 false,
                 "music_bboom",
-                R.drawable.img_album_exp2,
+                R.drawable.img_album_exp5,
                 false,
             )
         )
@@ -193,6 +198,49 @@ class MainActivity : AppCompatActivity() {
         Log.d("DB data", _songs.toString())
     }
 
+    //ROOM_DB
+    private fun inputDummyAlbums() {
+        val songDB = SongDatabase.getInstance(this)!!
+        val albums = songDB.albumDao().getAlbums()
 
+        if (albums.isNotEmpty()) return
 
+        songDB.albumDao().insert(
+            Album(
+                0,
+                "IU 5th Album 'LILAC'", "아이유 (IU)", R.drawable.img_album_exp2
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                1,
+                "Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                2,
+                "iScreaM Vol.10 : Next Level Remixes", "에스파 (AESPA)", R.drawable.img_album_exp3
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                3,
+                "MAP OF THE SOUL : PERSONA", "방탄소년단 (BTS)", R.drawable.img_album_exp4
+            )
+        )
+
+        songDB.albumDao().insert(
+            Album(
+                4,
+                "GREAT!", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5
+            )
+        )
+
+    }
 }
+
+

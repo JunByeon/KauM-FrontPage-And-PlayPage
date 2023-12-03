@@ -15,7 +15,7 @@ import java.util.ArrayList
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
-    private var albumDatas = ArrayList<Album>()
+    private var albumDatas = ArrayList<Album>() // 앨범 리스트
 
     private lateinit var songDB: SongDatabase
 
@@ -26,12 +26,7 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // 뷰바인딩
-//        binding.homeAlbumImgIv1.setOnClickListener {
-//            (context as MainActivity).supportFragmentManager.beginTransaction()
-//                .replace(R.id.main_frm , AlbumFragment())
-//                .commitAllowingStateLoss()
-//        }
+
 
         songDB = SongDatabase.getInstance(requireContext())!!
 //        albumDatas.addAll(songDB.albumDao().getAlbums()) // songDB에서 album list를  가져옴

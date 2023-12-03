@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaumusic.kaum.databinding.ItemAlbumBinding
 import java.util.*
 
-class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>(){
+class   AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>(){
 
     // 클릭 인터페이스 정의
     interface MyItemClickListener{

@@ -32,6 +32,8 @@
         <activity
             android:name="com.example.flo.SongActivity"
             android:exported="true" />
+
+
     </application>
 
 </manifest>
