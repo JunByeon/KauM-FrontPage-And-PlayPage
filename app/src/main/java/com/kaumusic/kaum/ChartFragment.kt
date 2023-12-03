@@ -1,14 +1,20 @@
 package com.kaumusic.kaum
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidmusicapp.LatestChartAdapter
 import com.kaumusic.kaum.databinding.FragmentChartBinding
+import org.jsoup.Jsoup
+import org.jsoup.select.Elements
+import kotlin.concurrent.thread
 
 class ChartFragment : Fragment() {
     val latestChartlist = arrayOf(
@@ -24,30 +30,14 @@ class ChartFragment : Fragment() {
         Music("Mt.Washington", "Local Natives")
     )// sample List
 
-    val popularlist = arrayOf(
-        Chart("A" , "Oasis", "1"),
-        Chart("Don't Look Back In Anger" , "Oasis", "2"),
-        Chart("Don't Look Back In Anger" , "Oasis", "3"),
-        Chart("Don't Look Back In Anger" , "Oasis", "4"),
-        Chart("Don't Look Back In Anger" , "Oasis", "5"),
-        Chart("Don't Look Back In Anger" , "Oasis", "6"),
-        Chart("Don't Look Back In Anger" , "Oasis", "7"),
-        Chart("Don't Look Back In Anger" , "Oasis", "8"),
-        Chart("Don't Look Back In Anger" , "Oasis", "9"),
-        Chart("Don't Look Back In Anger" , "Oasis", "10"),
-        Chart("Don't Look Back In Anger" , "Oasis", "11"),
-        Chart("Don't Look Back In Anger" , "Oasis", "12"),
-        Chart("Don't Look Back In Anger" , "Oasis", "13"),
-        Chart("Don't Look Back In Anger" , "Oasis", "14"),
-        Chart("Don't Look Back In Anger" , "Oasis", "15"),
-        Chart("Don't Look Back In Anger" , "Oasis", "16"),
-        Chart("Don't Look Back In Anger" , "Oasis", "17"),
-        Chart("Don't Look Back In Anger" , "Oasis", "18"),
-        Chart("Don't Look Back In Anger" , "Oasis", "19"),
-        Chart("Don't Look Back In Anger" , "Oasis", "20")
-    )// sample List
-
     lateinit var binding : FragmentChartBinding
+    val viewModel : musicViewModel by activityViewModels()
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.crawlData("https://www.melon.com/chart/index.htm")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,16 +48,20 @@ class ChartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.chart.observe(viewLifecycleOwner){
+            binding.recPopular.adapter?.notifyDataSetChanged()
+        }
+
 
         binding.recLatest.run{
             adapter = LatestChartAdapter(latestChartlist)
             layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        }
+        }// 최신곡
 
         binding.recPopular.run{
-            adapter = PopularAdapter(popularlist)
+            adapter = PopularAdapter(viewModel.chart)
             layoutManager = LinearLayoutManager(activity)
-        }
+        }// 인기곡
 
     }
 

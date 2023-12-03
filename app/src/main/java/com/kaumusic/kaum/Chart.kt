@@ -1,2 +1,8 @@
 package com.kaumusic.kaum
-data class Chart(var title:String, var singer: String, var rate: String)
+data class Chart(
+    val rank : String,
+    val title : String,
+    val artist : String,
+    val album : String,
+    val coverImg : String
+)

@@ -55,6 +55,8 @@ dependencies {
 
 
 
+    implementation("org.jsoup:jsoup:1.13.1")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 
     // roomDB
 
