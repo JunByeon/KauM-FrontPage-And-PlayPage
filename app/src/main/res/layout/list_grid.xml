@@ -8,9 +8,11 @@
 
     <ImageView
         android:id="@+id/img_album_albumlist"
-        android:layout_width="190dp"
-        android:layout_height="190dp"
-        android:layout_margin="10dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img_album_exp4" />
@@ -19,7 +21,7 @@
         android:id="@+id/txt_albumtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="ReadyMade"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -30,7 +32,6 @@
         android:id="@+id/txt_albuminfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="Cris. P. Bacon"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/txt_albumtitle"
