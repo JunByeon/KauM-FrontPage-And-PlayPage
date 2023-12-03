@@ -43,14 +43,14 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.mainNavView.getFragment<NavHostFragment>().navController
         // values/>
 
-        binding.mainBnv.setupWithNavController(navController)
-
         viewModel.run{
             // 멜론 차트 최신곡 Top 50 Crawl
             crawlLatest("https://www.melon.com/new/index.htm")
             // 멜론 차트 인기곡 Top 50 Crawl
             crawlChart("https://www.melon.com/chart/index.htm")
         } // initialize Chart Data on viewModel, while onCreate
+
+        binding.mainBnv.setupWithNavController(navController)
 
         setTheme(R.style.Theme_FLO)
         setContentView(binding.root)
