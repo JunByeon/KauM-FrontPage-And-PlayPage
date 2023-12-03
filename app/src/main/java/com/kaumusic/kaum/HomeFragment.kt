@@ -37,13 +37,16 @@ class HomeFragment : Fragment() {
         Log.d("albumlist", albumDatas.toString())
 
 
-
-
         // 더미데이터랑 Adapter 연결
-        val albumRVAdapter = AlbumRVAdapter(albumDatas)
+        val albumRVAdapter = AlbumRVAdapter()
+        songDB.albumDao().getAlbums().forEach{
+            albumDatas.add(it)
+        }
+        albumRVAdapter.setAlbums(albumDatas)
+
 
         // 리사이클러뷰에 어댑터를 연결
-        binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
+        binding. homeTodayMusicAlbumRv.adapter = albumRVAdapter
 
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener{
 

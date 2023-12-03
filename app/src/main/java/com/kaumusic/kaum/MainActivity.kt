@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
 
 //        showFragment(binding.mainNavView.id, HomeFragment())
 //
-//        inputDummySongs()
-//      inputDummyAlbums()
+        inputDummySongs()
+      inputDummyAlbums()
         val navController = binding.mainNavView.getFragment<NavHostFragment>().navController
         binding.mainBnv.setupWithNavController(navController)
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 databaseScope.async { songDB.songDao().getSong(songId) }.await()
             }
 
-            Log.d("song ID", song.id.toString())
+//            Log.d("song ID", song.id.toString() )
             setMiniPlayer(song)
 
         }

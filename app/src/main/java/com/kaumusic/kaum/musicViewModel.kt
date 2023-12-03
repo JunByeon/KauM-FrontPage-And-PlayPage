@@ -11,11 +11,6 @@ import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 
 class musicViewModel: ViewModel() {
-
-
-
-
-
     private val _chart = MutableLiveData<ArrayList<Chart>>()
     val chart : LiveData<ArrayList<Chart>> = _chart
 
