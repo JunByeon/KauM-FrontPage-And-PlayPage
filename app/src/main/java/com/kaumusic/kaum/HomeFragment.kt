@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.kaumusic.kaum.databinding.FragmentHomeBinding
 import java.util.ArrayList
+import kotlin.concurrent.thread
 
 class HomeFragment : Fragment() {
 
@@ -18,6 +19,9 @@ class HomeFragment : Fragment() {
     private var albumDatas = ArrayList<Album>()
 
     private lateinit var songDB: SongDatabase
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
