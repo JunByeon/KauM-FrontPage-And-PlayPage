@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var viewModel : musicViewModel
+    private lateinit var viewModel : musicViewModel
 
     //    private var song: Song = Song()
     private var gson: Gson = Gson()
@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.mainNavView.getFragment<NavHostFragment>().navController
         // values/>
 
+        binding.mainBnv.setupWithNavController(navController)
+
         viewModel.run{
             // 멜론 차트 최신곡 Top 50 Crawl
             crawlLatest("https://www.melon.com/new/index.htm")
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         inputDummySongs()
         inputDummyAlbums()
 
-        binding.mainBnv.setupWithNavController(navController)
+
 
         binding.mainPlayerCl.setOnClickListener {
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
@@ -86,10 +88,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 databaseScope.async { songDB.songDao().getSong(songId) }.await()
             }
-
-//            Log.d("song ID", song.id.toString() )
             setMiniPlayer(song)
-
         }
 
     }
