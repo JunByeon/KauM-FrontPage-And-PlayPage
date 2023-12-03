@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,49 +65,40 @@ class MyPlayListFragment : Fragment() {
         Music("Album_48", "Oasis"),
         Music("Album_49", "Oasis"),
         Music("Album_50", "Oasis"),
-        )// sample List
+    )// sample List
 
     var binding: FragmentMyPlayListBinding? = null
-
-    var isGridView : Boolean = true
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let{
-            isGridView = it.getBoolean("isGridView")
-        }
-    }
+    private val viewModel : musicViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?)
-            : View? {
-        binding =  FragmentMyPlayListBinding.inflate(inflater)
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMyPlayListBinding.inflate(inflater)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(isGridView) {
-            binding?.recAlbumlist?.run {
-                adapter = PlayListAdapter(albumlist)
-                layoutManager = GridLayoutManager(activity, 2)
-            }
 
-        }
-        else{
+        viewModel.isGridView.observe(viewLifecycleOwner){
             binding?.recAlbumlist?.run{
-                adapter = MyLinearListAdapter(albumlist)
-                layoutManager = LinearLayoutManager(activity)
-            }
-        }
+                if (it){
+                    adapter = PlayListAdapter(albumlist)
+                    layoutManager = GridLayoutManager(activity, 2)
+                } else {
+                    adapter = MyLinearListAdapter(albumlist)
+                    layoutManager = LinearLayoutManager(activity)
+                } // Make View by Grid if(isGridView) else by Linear
+            } // Make RecView of Album list
+        } // observe isGridView value
 
-        binding?.btnSortMethod?.setOnClickListener { 
-            //정렬방식변경
+        binding?.btnSortMethod?.setOnClickListener {
+            //정렬 방식 변경 (미구현)
         }
-        binding?.btnSortType?.setOnClickListener{
-            val bundle = bundleOf("isGridView" to !isGridView)
-            findNavController().navigate(R.id.action_myPlayListFragment_self, bundle)
+        binding?.btnSortType?.setOnClickListener {
+            viewModel.changeSortType()
+            findNavController().navigate(R.id.action_myPlayListFragment_self)
         }
     }
 

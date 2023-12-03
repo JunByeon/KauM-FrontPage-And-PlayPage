@@ -18,6 +18,13 @@ class musicViewModel: ViewModel() {
     private val _latest = MutableLiveData<ArrayList<Chart>>()
     val latest : LiveData<ArrayList<Chart>> = _latest
 
+    private val _isGridView = MutableLiveData(true)
+    val isGridView : LiveData<Boolean> = _isGridView
+
+    fun changeSortType(){
+        _isGridView.value = _isGridView.value?.not() ?: true
+    }
+
     fun crawlChart(url : String){
         viewModelScope.launch{
             withContext(Dispatchers.IO){
