@@ -1,5 +1,6 @@
 package com.kaumusic.kaum
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,10 @@ class musicViewModel: ViewModel() {
     private val _chart = MutableLiveData<ArrayList<Chart>>()
     val chart : LiveData<ArrayList<Chart>> = _chart
 
-    fun crawlData(url : String){
+    private val _latest = MutableLiveData<ArrayList<Chart>>()
+    val latest : LiveData<ArrayList<Chart>> = _latest
+
+    fun crawlChart(url : String){
         viewModelScope.launch{
             withContext(Dispatchers.IO){
                 val doc = Jsoup.connect(url).get()
@@ -40,6 +44,36 @@ class musicViewModel: ViewModel() {
                 }
                 _chart.postValue(elemList)
                 }
+
+        }
+    }
+
+    fun crawlLatest(url : String){
+        viewModelScope.launch{
+            withContext(Dispatchers.IO){
+                val doc = Jsoup.connect(url).get()
+                val element : Elements = doc.select("div#songList").select("tbody").select("tr")
+
+                var rank : String
+                var title : String
+                var artist : String
+                var album : String
+                var coverImg : String
+                val elemList = ArrayList<Chart>()
+
+                for(elem in element){
+                    elem.run{
+                        rank = select("div.wrap.t_center").select("span.rank").text()
+                        title = select("div.ellipsis.rank01").select("span").text()
+                        artist = select("div.ellipsis.rank02").select("span").text()
+                        album = select("div.ellipsis.rank03").select("a").text()
+                        coverImg = select("div.wrap").select("a").select("img").attr("src")
+                    }
+
+                    elemList.add(Chart(rank, title, artist, album, coverImg))
+                }
+                _latest.postValue(elemList)
+            }
 
         }
     }

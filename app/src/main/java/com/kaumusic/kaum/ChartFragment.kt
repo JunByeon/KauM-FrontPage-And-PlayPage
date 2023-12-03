@@ -17,26 +17,17 @@ import org.jsoup.select.Elements
 import kotlin.concurrent.thread
 
 class ChartFragment : Fragment() {
-    val latestChartlist = arrayOf(
-        Music("Don't Look Back In Anger" , "Oasis"),
-        Music("Creep", "RadioHead"),
-        Music("My Religion", "Troy Baker"),
-        Music("Time is Running out", "Muse"),
-        Music("Stand by me", "Oasis"),
-        Music("No Surprises", "RadioHead"),
-        Music("Don't Matter", "Kings of Leon"),
-        Music("When I'm Gonna Lose You", "Local Natives"),
-        Music("Crosses", "Jose Gonzalez"),
-        Music("Mt.Washington", "Local Natives")
-    )// sample List
 
     lateinit var binding : FragmentChartBinding
     val viewModel : musicViewModel by activityViewModels()
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.crawlData("https://www.melon.com/chart/index.htm")
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        // 멜론 차트 최신곡 Top 50 Crawl
+//        viewModel.crawlLatest("https://www.melon.com/new/index.htm")
+//        // 멜론 차트 인기곡 Top 50 Crawl
+//        viewModel.crawlChart("https://www.melon.com/chart/index.htm")
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,19 +40,22 @@ class ChartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.chart.observe(viewLifecycleOwner){
-            binding.recPopular.adapter?.notifyDataSetChanged()
-        }
-
+            binding.run{
+                recPopular.adapter?.notifyDataSetChanged()
+                recLatest.adapter?.notifyDataSetChanged()
+            }// notify DataSet Change to adapters exist.
+        }// Observe ViewModel.
 
         binding.recLatest.run{
-            adapter = LatestChartAdapter(latestChartlist)
+            adapter = LatestChartAdapter(viewModel.latest)
             layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        }// 최신곡
+        }// show RecView: chart(Latest) as Horizontal View
+
 
         binding.recPopular.run{
             adapter = PopularAdapter(viewModel.chart)
             layoutManager = LinearLayoutManager(activity)
-        }// 인기곡
+        }// show RecView: chart(Popular) as Vertical View
 
     }
 

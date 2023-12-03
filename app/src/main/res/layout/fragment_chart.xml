@@ -24,8 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_marginStart = "4dp"
-                android:text="새 앨범 및 싱글"
+                android:layout_marginStart="4dp"
+                android:text="최신곡"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

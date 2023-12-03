@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -23,6 +25,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+    lateinit var viewModel : musicViewModel
 
     //    private var song: Song = Song()
     private var gson: Gson = Gson()
@@ -30,15 +33,29 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_FLO)
+
+        // <lateinit
+        viewModel = ViewModelProvider(this)[musicViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
+        // lateinit/>
+
+        // <values
+        val navController = binding.mainNavView.getFragment<NavHostFragment>().navController
+        // values/>
+
+        viewModel.run{
+            // 멜론 차트 최신곡 Top 50 Crawl
+            crawlLatest("https://www.melon.com/new/index.htm")
+            // 멜론 차트 인기곡 Top 50 Crawl
+            crawlChart("https://www.melon.com/chart/index.htm")
+        } // initialize Chart Data on viewModel, while onCreate
+
+        setTheme(R.style.Theme_FLO)
         setContentView(binding.root)
 
-//        showFragment(binding.mainNavView.id, HomeFragment())
-//
         inputDummySongs()
-      inputDummyAlbums()
-        val navController = binding.mainNavView.getFragment<NavHostFragment>().navController
+        inputDummyAlbums()
+
         binding.mainBnv.setupWithNavController(navController)
 
         binding.mainPlayerCl.setOnClickListener {
@@ -49,9 +66,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SongActivity::class.java)
             startActivity(intent)
         }
-
-//        Log.d("MAIN/JWT_TO_SERVER", getJwt().toString())
-
     }
 
     override fun onStart() {
