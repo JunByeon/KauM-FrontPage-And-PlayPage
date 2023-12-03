@@ -33,7 +33,7 @@
                 android:id="@+id/rec_latest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="24dp" />
 
             <TextView
                 android:id="@+id/txt_popular"
