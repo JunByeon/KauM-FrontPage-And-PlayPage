@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869067861227",
+    "project_id": "kaum-13bfa",
+    "storage_bucket": "kaum-13bfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869067861227:android:3b27cc027e4ff8096262ae",
+        "android_client_info": {
+          "package_name": "com.kaumusic.kaum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhZYXarCIZbU2T7KXrNFfSneLomWmetNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
