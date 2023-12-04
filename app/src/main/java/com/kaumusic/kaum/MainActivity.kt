@@ -19,6 +19,10 @@ import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
+    // 상단 Action Bar는 계속 오류가 나는 관계로 사용하지 않도록 결정함
+    // binding을 밖에 빼서 선언하는 이유는 이 binding을 전역적으로 선언하여 다른 곳에서도 사용하기 위해서이다.
+    // private으로 선언하지 않은 이유 : MainActivity부터 lifecycle이 시작이 되는데 굳이 private으로 해서 막아줄 필요가 있을까?
+
 
     lateinit var binding: ActivityMainBinding
     private lateinit var viewModel : musicViewModel
