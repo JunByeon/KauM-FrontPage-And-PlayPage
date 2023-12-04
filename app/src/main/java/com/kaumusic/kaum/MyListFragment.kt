@@ -51,6 +51,7 @@ class MyListFragment : Fragment() {
         viewModel.album.observe(viewLifecycleOwner){album ->
             binding?.run{
                 txtAlbumTitle.text = album.title
+                imgAlbum.setImageResource(album.coverImg ?: R.drawable.baseline_album_24)
             }
         }
 
