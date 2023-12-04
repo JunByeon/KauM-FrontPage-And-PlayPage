@@ -10,7 +10,7 @@ class AlbumVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         return when(position) {
             0-> SongFragment()
             1-> DetailFragment()
-            else-> VideoFragment()
+            else-> AlbumvideoFragment()
         }
     }
 

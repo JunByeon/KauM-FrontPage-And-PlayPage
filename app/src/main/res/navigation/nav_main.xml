@@ -20,11 +20,11 @@
             android:id="@+id/action_homeFragment2_to_myPlayListFragment"
             app:destination="@id/myPlayListFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_answerFragment2"
-            app:destination="@id/answerFragment" />
-        <action
             android:id="@+id/action_homeFragment_self2"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/chartFragment"
@@ -58,12 +58,12 @@
         android:label="MyListFragment"
         tools:layout="@layout/fragment_mylist"/>
     <fragment
-        android:id="@+id/answerFragment"
-        android:name="com.kaumusic.kaum.answerFragment"
-        android:label="fragment_answer"
-        tools:layout="@layout/fragment_answer" >
+        android:id="@+id/resultFragment"
+        android:name="com.kaumusic.kaum.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
         <action
-            android:id="@+id/action_answerFragment_to_homeFragment"
+            android:id="@+id/action_resultFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

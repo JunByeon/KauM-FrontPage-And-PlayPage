@@ -88,7 +88,7 @@ class HomeFragment : Fragment() {
 
         binding?.btnResult?.setOnClickListener {
             // 어차피 ViewModel에 data 변화가 일어나기 때문에 굳이 bundle로 직접 data result를 넘겨줄 필요가 없음
-            val destination = if (binding?.chkYN?.isChecked == true) R.id.action_homeFragment_to_answerFragment2 else R.id.action_homeFragment_self2
+            val destination = if (binding?.chkYN?.isChecked == true) R.id.action_homeFragment_to_resultFragment else R.id.action_homeFragment_self2
             findNavController().navigate(destination)
         }
     }

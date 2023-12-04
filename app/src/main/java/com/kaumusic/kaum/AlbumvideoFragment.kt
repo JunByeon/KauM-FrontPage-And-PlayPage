@@ -5,19 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kaumusic.kaum.databinding.FragmentDetailBinding
-import com.kaumusic.kaum.databinding.FragmentVideoBinding
+import com.kaumusic.kaum.databinding.FragmentAlbumvideoBinding
 
-class VideoFragment : Fragment() {
-    lateinit var binding: FragmentVideoBinding
-
+class AlbumvideoFragment: Fragment() {
+    lateinit var binding: FragmentAlbumvideoBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentVideoBinding.inflate(inflater,container,false)
-
+        binding = FragmentAlbumvideoBinding.inflate(inflater,container,false)
         return binding.root
     }
+
 }
