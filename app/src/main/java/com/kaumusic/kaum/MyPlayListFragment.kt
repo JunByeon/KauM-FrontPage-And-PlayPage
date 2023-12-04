@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kaumusic.kaum.databinding.FragmentMyPlayListBinding
+import com.kaumusic.kaum.viewmodel.MusicViewModel
 
 class MyPlayListFragment : Fragment() {
 
@@ -67,7 +68,7 @@ class MyPlayListFragment : Fragment() {
     )// sample List
 
     var binding: FragmentMyPlayListBinding? = null
-    private val viewModel : musicViewModel by activityViewModels()
+    private val viewModel : MusicViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -9,11 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kaumusic.kaum.databinding.FragmentChartBinding
+import com.kaumusic.kaum.viewmodel.MusicViewModel
 
 class ChartFragment : Fragment() {
 
     var binding : FragmentChartBinding? = null
-    val viewModel : musicViewModel by activityViewModels()
+    val viewModel : MusicViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

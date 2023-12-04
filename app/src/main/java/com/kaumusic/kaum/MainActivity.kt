@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.kaumusic.kaum.ScopeProvider.databaseScope
 //import com.kaumusic.kaum.SongActivity
 import com.kaumusic.kaum.databinding.ActivityMainBinding
+import com.kaumusic.kaum.viewmodel.MusicViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
 
     lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel : musicViewModel
+    private lateinit var viewModel : MusicViewModel
 
     //    private var song: Song = Song()
     private var gson: Gson = Gson()
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // <lateinit
-        viewModel = ViewModelProvider(this)[musicViewModel::class.java]
+        viewModel = ViewModelProvider(this)[MusicViewModel::class.java]
         binding = ActivityMainBinding.inflate(layoutInflater)
         // lateinit/>
 
@@ -45,9 +46,9 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.run{
             // 멜론 차트 최신곡 Top 50 Crawl
-            crawlLatest("https://www.melon.com/new/index.htm")
+            getLatest()
             // 멜론 차트 인기곡 Top 50 Crawl
-            crawlChart("https://www.melon.com/chart/index.htm")
+            getChart()
         } // initialize Chart Data on viewModel, while onCreate
 
         binding.mainBnv.setupWithNavController(navController)
