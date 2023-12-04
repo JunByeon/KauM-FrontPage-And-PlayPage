@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kaumusic.kaum.databinding.FragmentMylistBinding
+import com.kaumusic.kaum.viewmodel.MusicViewModel
 
 
 class MyListFragment : Fragment() {
@@ -24,7 +26,17 @@ class MyListFragment : Fragment() {
         Music("Crosses", "Jose Gonzalez"),
         Music("Mt.Washington", "Local Natives")
     )// sample List
+
+
     var binding: FragmentMylistBinding? = null
+    val viewModel : MusicViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let{
+            viewModel.getAlbum(it.getInt("Album id"))
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +48,11 @@ class MyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.album.observe(viewLifecycleOwner){album ->
+            binding?.run{
+                txtAlbumTitle.text = album.title
+            }
+        }
 
         binding?.recMusic?.run{
             adapter = MyListAdapter(musiclist)

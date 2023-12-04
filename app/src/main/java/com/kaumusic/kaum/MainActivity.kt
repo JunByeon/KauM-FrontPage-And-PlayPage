@@ -1,5 +1,6 @@
 package com.kaumusic.kaum
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,9 +35,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // <lateinit
+        Log.d("Result", "Point 01")
         viewModel = ViewModelProvider(this)[MusicViewModel::class.java]
+        Log.d("Result", "Point 02")
         binding = ActivityMainBinding.inflate(layoutInflater)
         // lateinit/>
 

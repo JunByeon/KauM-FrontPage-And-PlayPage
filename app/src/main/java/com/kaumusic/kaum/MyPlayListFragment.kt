@@ -81,9 +81,9 @@ class MyPlayListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.isGridView.observe(viewLifecycleOwner){
+        viewModel.isGridView.observe(viewLifecycleOwner){isGridView ->
             binding?.recAlbumlist?.run{
-                if (it){
+                if (isGridView){
                     adapter = PlayListAdapter(albumlist)
                     layoutManager = GridLayoutManager(activity, 2)
                 } else {

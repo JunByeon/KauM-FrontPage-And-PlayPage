@@ -14,7 +14,7 @@ import com.kaumusic.kaum.viewmodel.MusicViewModel
 class ChartFragment : Fragment() {
 
     var binding : FragmentChartBinding? = null
-    val viewModel : MusicViewModel by activityViewModels()
+    private val viewModel : MusicViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
