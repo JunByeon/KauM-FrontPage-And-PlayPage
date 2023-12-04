@@ -1,4 +1,4 @@
-package com.kaumusic.kaum.view.fragment
+package com.kaumusic.kaum
 
 import android.os.Bundle
 import android.util.Log
@@ -11,14 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
-import com.kaumusic.kaum.Album
-import com.kaumusic.kaum.AlbumFragment
-import com.kaumusic.kaum.AlbumRVAdapter
-import com.kaumusic.kaum.BannerFragment
-import com.kaumusic.kaum.BannerVPAdapter
-import com.kaumusic.kaum.MainActivity
-import com.kaumusic.kaum.R
-import com.kaumusic.kaum.SongDatabase
 import com.kaumusic.kaum.databinding.FragmentHomeBinding
 import com.kaumusic.mynavapplication.viewmodel.AnswerViewModel
 import java.util.ArrayList
@@ -60,7 +52,7 @@ class HomeFragment : Fragment() {
         // 리사이클러뷰에 어댑터를 연결
         binding!!. homeTodayMusicAlbumRv.adapter = albumRVAdapter
 
-        albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener {
+        albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener{
 
             override fun onItemClick(album: Album) {
                 changeAlbumFragment(album)

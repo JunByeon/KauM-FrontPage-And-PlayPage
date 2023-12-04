@@ -1,4 +1,4 @@
-package com.kaumusic.kaum.view.fragment
+package com.kaumusic.kaum
 
 import android.content.Intent
 import android.net.Uri
@@ -13,20 +13,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.storage.FirebaseStorage
-import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.FragmentResultBinding
 import com.kaumusic.mynavapplication.viewmodel.AnswerViewModel
-import com.kaumusic.kaum.entity.Video
-import com.kaumusic.kaum.view.adapter.VideoRVAdapter
-import com.kaumusic.kaum.viewmodel.VideoViewModel
-import io.reactivex.Observer
+import com.kaumusic.mynavapplicationfinal.Video
+import com.kaumusic.mynavapplicationfinal.VideoRVAdapter
 
 class ResultFragment : Fragment() {
     // View Model의 life cycle이 activity에 물려서 종속이 되도록 아래와 같이 설정
-    val answerViewModel: AnswerViewModel by activityViewModels()
-    val videoViewModel : VideoViewModel by activityViewModels()
+    val viewModel: AnswerViewModel by activityViewModels()
+
     var binding : FragmentResultBinding? = null
-    var adapter: VideoRVAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,24 +34,35 @@ class ResultFragment : Fragment() {
         // binding에 null이 들어올 수도 있으므로 그냥 아싸리 위에다가 전역적으로 binding을 선언해줄까 하다가 그냥 Code Convention을 맞추기 위해 아래와 같이 처리함
         val recyclerView: RecyclerView = binding!!.recycler
 
-        adapter = VideoRVAdapter(requireContext(), mutableListOf())
-        adapter.setOnItemClickListener(object : VideoRVAdapter.OnItemClickListener {
-            override fun onClick(video: Video) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(video.url))
-                intent.setDataAndType(Uri.parse(video.url), "video/mp4")
-                startActivity(intent)
+        // Firebase Storage에서 동영상 가져오기 기능
+        FirebaseStorage.getInstance().reference.child("videos").listAll()
+            .addOnSuccessListener { listResult -> // 일단 Firebase Storage에 있는 videos라는 폴더의 모든 동여상을 담아서 list로 만든다
+                val arrayList = ArrayList<Video>()
+                val adapter = VideoRVAdapter(requireContext(), arrayList) // adapter가 Recycler View에 Data 꽂아넣음
+                adapter.setOnItemClickListener(object : VideoRVAdapter.OnItemClickListener {
+                    override fun onClick(video: Video) { // video가 클릭이 되면 아래와 같이 새로운 activi
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(video.url))
+                        intent.setDataAndType(Uri.parse(video.url), "video/mp4")
+                        startActivity(intent)
+                    }
+                })
+                recyclerView.adapter = adapter
+                listResult.items.forEach { storageReference ->
+                    val video = Video() // 각각의 video에 대해서 url을 mapping 시켜주고 title 등을 받아옴
+                    video.title = storageReference.name
+                    storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+                        val url =
+                            "https://${task.result?.encodedAuthority}${task.result?.encodedPath}?alt=media&token=${task.result?.getQueryParameters("token")?.get(0)}"
+                        video.url = url
+                        arrayList.add(video)
+                        adapter.notifyDataSetChanged()
+                    })
+                }
             }
-        })
-        recyclerView.adapter = adapter
-        // Observe the LiveData and update the UI when the data changes
-        videoViewModel.getVideosLiveData().observe(viewLifecycleOwner, Observer { videos ->
-            videos?.let {
-                adapter.setVideoList(it)
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Failed to retrieve videos", Toast.LENGTH_SHORT)
+                    .show()
             }
-        })
-
-        // Trigger the data loading
-        videoViewModel.getVideos()
 
         return binding?.root
     }
@@ -63,9 +70,9 @@ class ResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // live data의 변경을 가져다가 data binding한다.
-        answerViewModel.answer.observe(viewLifecycleOwner) {
+        viewModel.answer.observe(viewLifecycleOwner) {
             // observe한다. 바뀌거나 처음보는 경우엔 읽는다.
-            binding?.txtResult?.text = answerViewModel.answer.value
+            binding?.txtResult?.text = viewModel.answer.value
         }
         binding?.btnReexamine?.setOnClickListener {
             findNavController().navigate(R.id.action_resultFragment_to_homeFragment)

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.kaumusic.kaum.databinding.FragmentAlbumBinding
-import com.kaumusic.kaum.view.fragment.HomeFragment
 
 class AlbumFragment : Fragment() {
     private lateinit var binding: FragmentAlbumBinding

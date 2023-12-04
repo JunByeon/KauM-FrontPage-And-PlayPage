@@ -1,4 +1,4 @@
-package com.kaumusic.kaum.entity
+package com.kaumusic.mynavapplicationfinal
 
 // Firebase Storage에서 받아올 Data의 data class
 data class Video(

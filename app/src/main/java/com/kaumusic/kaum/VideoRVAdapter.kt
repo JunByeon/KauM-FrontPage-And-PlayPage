@@ -1,4 +1,4 @@
-package com.kaumusic.kaum.view.adapter
+package com.kaumusic.mynavapplicationfinal
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kaumusic.kaum.databinding.VideoListItemBinding
-import com.kaumusic.kaum.entity.Video
 
 // Video을 넣을 Recycler View를 다룰 Adapter
 class VideoRVAdapter(
