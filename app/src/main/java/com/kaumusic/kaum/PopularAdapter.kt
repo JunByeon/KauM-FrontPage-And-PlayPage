@@ -4,11 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.ListLinearRankedBinding
 
 class PopularAdapter(val popularlist: LiveData<ArrayList<Chart>>) :

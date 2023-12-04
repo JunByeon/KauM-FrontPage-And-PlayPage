@@ -53,6 +53,17 @@ dependencies {
     implementation ("androidx.appcompat:appcompat:1.2.0")
     implementation ("androidx.appcompat:appcompat:latest-version")
 
+    // firebase
+    implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("androidx.activity:activity-ktx:1.8.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
+    implementation("org.jsoup:jsoup:1.13.1")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.google.firebase:firebase-firestore:24.9.1")
+
 
 
     implementation("org.jsoup:jsoup:1.13.1")

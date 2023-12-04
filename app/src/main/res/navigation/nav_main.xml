@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_homeFragment2_to_myPlayListFragment"
             app:destination="@id/myPlayListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_answerFragment2"
+            app:destination="@id/answerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_self2"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/chartFragment"
@@ -51,4 +57,13 @@
         android:name="com.kaumusic.kaum.MyListFragment"
         android:label="MyListFragment"
         tools:layout="@layout/fragment_mylist"/>
+    <fragment
+        android:id="@+id/answerFragment"
+        android:name="com.kaumusic.kaum.answerFragment"
+        android:label="fragment_answer"
+        tools:layout="@layout/fragment_answer" >
+        <action
+            android:id="@+id/action_answerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

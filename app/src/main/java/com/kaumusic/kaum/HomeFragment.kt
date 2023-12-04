@@ -11,7 +11,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.kaumusic.kaum.databinding.FragmentHomeBinding
 import java.util.ArrayList
-import kotlin.concurrent.thread
 
 class HomeFragment : Fragment() {
 
