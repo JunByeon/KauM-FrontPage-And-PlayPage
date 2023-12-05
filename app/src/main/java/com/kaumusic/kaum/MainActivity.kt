@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -17,6 +18,7 @@ import com.kaumusic.kaum.data.db.SongDatabase
 import com.kaumusic.kaum.databinding.ActivityMainBinding
 import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.domain.Song
+import com.kaumusic.kaum.domain.SongList
 import com.kaumusic.kaum.viewmodel.MusicViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -61,7 +63,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         inputDummySongs()
+
         inputDummyAlbums()
+
 
 
 
@@ -214,43 +218,56 @@ class MainActivity : AppCompatActivity() {
     private fun inputDummyAlbums() {
         val songDB = SongDatabase.getInstance(this)!!
         val albums = songDB.albumDao().getAlbums()
+        val songList = songDB.songDao().getSongs().toMutableList()
 
         if (albums.isNotEmpty()) return
 
         songDB.albumDao().insert(
             Album(
                 0,
-                "IU 5th Album 'LILAC'", "아이유 (IU)", R.drawable.img_album_exp2
+                "IU 5th Album 'LILAC'", "아이유 (IU)",
+                coverImg = R.drawable.img_album_exp2,
+                songList = songList
             )
         )
 
         songDB.albumDao().insert(
             Album(
                 1,
-                "Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp
+                "Butter", "방탄소년단 (BTS)",
+                coverImg = R.drawable.img_album_exp,
+                songList = songList
             )
         )
 
         songDB.albumDao().insert(
             Album(
                 2,
-                "iScreaM Vol.10 : Next Level Remixes", "에스파 (AESPA)", R.drawable.img_album_exp3
+                "iScreaM Vol.10 : Next Level Remixes", "에스파 (AESPA)",
+                coverImg = R.drawable.img_album_exp3,
+                songList = songList
             )
         )
 
         songDB.albumDao().insert(
             Album(
                 3,
-                "MAP OF THE SOUL : PERSONA", "방탄소년단 (BTS)", R.drawable.img_album_exp4
+                "MAP OF THE SOUL : PERSONA", "방탄소년단 (BTS)",
+                coverImg = R.drawable.img_album_exp4,
+                songList = songList
             )
         )
 
         songDB.albumDao().insert(
             Album(
                 4,
-                "GREAT!", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5
+                "GREAT!", "모모랜드 (MOMOLAND)",
+                coverImg = R.drawable.img_album_exp5,
+                songList = songList
             )
         )
+
+
 
     }
 }

@@ -1,6 +1,7 @@
 package com.kaumusic.kaum.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,11 +56,19 @@ class MyListFragment : Fragment() {
             binding?.run{
                 txtAlbumTitle.text = album.title
                 imgAlbum.setImageResource(album.coverImg ?: R.drawable.baseline_album_24)
+                viewModel.getSongList()
+            }
+        }
+
+        viewModel.songList.observe(viewLifecycleOwner){songList ->
+            binding?.run{
+                recMusic.adapter?.notifyDataSetChanged()
             }
         }
 
         binding?.recMusic?.run{
-            adapter = MyListAdapter(musiclist)
+            Log.d("size of", "${viewModel.songList.value?.size ?: -1}")
+            adapter = MyListAdapter(viewModel.songList)
             layoutManager = LinearLayoutManager(activity)
         }
 

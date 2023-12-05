@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.domain.Chart
 import com.kaumusic.kaum.data.repository.MusicRepository
+import com.kaumusic.kaum.domain.Song
 import kotlinx.coroutines.launch
 
 class MusicViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,6 +30,12 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _albums = MutableLiveData<List<Album>>()
     val albums : LiveData<List<Album>> = _albums
+
+    private val _songs = MutableLiveData<List<Song>>()
+    val songs : LiveData<List<Song>> = _songs
+
+    private val _songList = MutableLiveData<MutableList<Song>>()
+    val songList : LiveData<MutableList<Song>> = _songList
     // LiveDatas/>
 
 
@@ -36,6 +43,11 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     fun changeSortType() {
         _isGridView.value = _isGridView.value?.not() ?: true
     }
+
+    fun getSongList(){
+        _songList.value = _album.value?.songList ?: mutableListOf()
+    }
+
     fun getLatest(){
         viewModelScope.launch {
             repository.crawlLatest()?.let { element ->
@@ -88,6 +100,12 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     fun getAlbums(){
         viewModelScope.launch {
             _albums.value = repository.getAlbums()
+        }
+    }
+
+    fun getSongs(){
+        viewModelScope.launch {
+            _songs.value = repository.getSongs()
         }
     }
     // DB Call/>

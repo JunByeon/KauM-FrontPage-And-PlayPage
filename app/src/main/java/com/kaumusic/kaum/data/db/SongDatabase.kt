@@ -5,15 +5,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.kaumusic.kaum.data.dao.AlbumDao
 import com.kaumusic.kaum.data.dao.SongDao
 import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.domain.Song
 
 
-@Database(entities = [Song::class, Album::class], version = 7)
+@Database(entities = [Song::class, Album::class], version = 9)
+@TypeConverters(Converters::class)
 abstract class SongDatabase : RoomDatabase() {
-
     abstract fun albumDao(): AlbumDao
     abstract fun songDao(): SongDao
 //    abstract fun userDao(): UserDao

@@ -3,7 +3,9 @@ package com.kaumusic.kaum.data.repository
 import android.app.Application
 import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.data.dao.AlbumDao
+import com.kaumusic.kaum.data.dao.SongDao
 import com.kaumusic.kaum.data.db.SongDatabase
+import com.kaumusic.kaum.domain.Song
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
@@ -19,6 +21,7 @@ class MusicRepository(application: Application) {
     // Room DB
     private val database = SongDatabase.getInstance(application)!!
     private val albumDao: AlbumDao = database.albumDao()
+    private val songDao: SongDao = database.songDao()
 
     // Connection/>
 
@@ -47,6 +50,12 @@ class MusicRepository(application: Application) {
     suspend fun getAlbums() : List<Album>{
         return withContext(Dispatchers.IO){
             albumDao.getAlbums()
+        }
+    }
+
+    suspend fun getSongs() : List<Song>{
+        return withContext(Dispatchers.IO){
+            songDao.getSongs()
         }
     }
     // DB Call/>

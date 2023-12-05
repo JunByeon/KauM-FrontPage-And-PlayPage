@@ -1,5 +1,6 @@
 package com.kaumusic.kaum.domain
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.ArrayList
@@ -10,5 +11,5 @@ data class Album(
     var title: String? = "",
     var singer: String? = "",
     var coverImg: Int? = null,
-//    var songs: ArrayList<Song>? = null
+    var songList : MutableList<Song>
 )
