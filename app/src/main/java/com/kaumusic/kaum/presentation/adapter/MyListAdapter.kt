@@ -1,14 +1,15 @@
 package com.kaumusic.kaum.presentation.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.ListLinearBinding
-import com.kaumusic.kaum.domain.Music
 import com.kaumusic.kaum.domain.Song
+import com.kaumusic.kaum.presentation.activity.SongActivity
 
 class MyListAdapter(val musiclist: LiveData<MutableList<Song>>) : RecyclerView.Adapter<MyListAdapter.Holder>() {
 
@@ -32,12 +33,10 @@ class MyListAdapter(val musiclist: LiveData<MutableList<Song>>) : RecyclerView.A
                     txtSinger.text = music.singer
                 }
                 binding.root.setOnClickListener{
-                    Toast.makeText(
-                        binding.root.context,
-                        "${music.title} - ${music.singer} 가 재생됩니다!",
-                        Toast.LENGTH_SHORT)
-                        .show()
+                    val intent = Intent(it.context, SongActivity::class.java)
+                    startActivity(it.context, intent, null)
                 }
+
             }
 
         }

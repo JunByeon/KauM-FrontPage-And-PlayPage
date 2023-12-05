@@ -1,5 +1,6 @@
 package com.kaumusic.kaum.presentation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.kaumusic.kaum.presentation.adapter.MyListAdapter
 import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.FragmentMylistBinding
 import com.kaumusic.kaum.domain.Music
+import com.kaumusic.kaum.presentation.activity.SongActivity
 import com.kaumusic.kaum.viewmodel.MusicViewModel
 
 
@@ -73,29 +75,14 @@ class MyListFragment : Fragment() {
         }
 
         binding?.btnListPlay?.setOnClickListener{
-            Toast.makeText(
-                this.context,
-                "${musiclist[0].title}이 재생됩니다!",
-                Toast.LENGTH_SHORT).show()
+            val intent = Intent(activity, SongActivity::class.java)
+            startActivity(intent)
         }
 
-        binding?.btnListModify?.setOnClickListener{
-            /*
-            val alert = AlertDialog.Builder(activity)
-            alert.run{
-                setTitle("앨범 이름 수정")
-                setIcon(R.drawable.baseline_mode_edit_24)
-                setMessage("앨범 이름을 수정한 후 확인을 누르세요.")
-                setPositiveButton("확인", null)
-                setNegativeButton("취소", null)
-                show()
-            }
-             */
 
-
-            val newName = EditText(activity)
-        }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
