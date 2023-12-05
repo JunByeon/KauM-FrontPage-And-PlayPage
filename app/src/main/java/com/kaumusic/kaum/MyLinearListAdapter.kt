@@ -2,6 +2,7 @@ package com.kaumusic.kaum
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -30,7 +31,9 @@ class MyLinearListAdapter(val albumlist: Array<Music>) :
                 txtSingerAlbum.text = albumlist.singer
             }
             binding.root.setOnClickListener {
-                it.findNavController().navigate(R.id.action_myPlayListFragment_to_myListFragment)
+                val bundle = bundleOf("Album id" to 0)
+                // 1은 임의값, 실제 Album의 id를 넘겨주어야 함.
+                it.findNavController().navigate(R.id.action_myPlayListFragment_to_myListFragment, bundle)
             }
         }
     }
