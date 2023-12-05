@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.kaumusic.kaum.presentation.adapter.AlbumRVAdapter
-import com.kaumusic.kaum.presentation.adapter.BannerVPAdapter
 import com.kaumusic.kaum.R
 import com.kaumusic.kaum.data.db.SongDatabase
 import com.kaumusic.kaum.databinding.FragmentHomeBinding
@@ -69,12 +68,6 @@ class HomeFragment : Fragment() {
         })
         // 레이아웃 매니저 설정
         binding!!.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        val bannerAdapter = BannerVPAdapter(this)
-        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
-        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
-        binding!!.homeBannerVp.adapter = bannerAdapter
-        binding!!.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         return binding!!.root
     }
