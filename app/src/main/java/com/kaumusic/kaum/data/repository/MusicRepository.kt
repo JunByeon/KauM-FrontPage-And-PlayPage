@@ -43,5 +43,11 @@ class MusicRepository(application: Application) {
             albumDao.getAlbum(id)
         }
     }
+
+    suspend fun getAlbums() : ArrayList<Album>{
+        return withContext(Dispatchers.IO){
+            albumDao.getAlbums()
+        }
+    }
     // DB Call/>
 }

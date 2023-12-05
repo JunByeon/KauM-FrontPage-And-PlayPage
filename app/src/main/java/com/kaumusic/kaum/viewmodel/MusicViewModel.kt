@@ -26,6 +26,9 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _album = MutableLiveData<Album>()
     val album : LiveData<Album> = _album
+
+    private val _albums = MutableLiveData<ArrayList<Album>>()
+    val albums : LiveData<ArrayList<Album>> = _albums
     // LiveDatas/>
 
 
@@ -80,6 +83,11 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     fun getAlbum(id : Int){
         viewModelScope.launch {
             _album.value = repository.getAlbum(id)
+        }
+    }
+    fun getAlbums(){
+        viewModelScope.launch {
+            _albums.value = repository.getAlbums()
         }
     }
     // DB Call/>

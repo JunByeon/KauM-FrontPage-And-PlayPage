@@ -11,7 +11,7 @@ import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.domain.Song
 
 
-@Database(entities = [Song::class, Album::class], version = 6)
+@Database(entities = [Song::class, Album::class], version = 7)
 abstract class SongDatabase : RoomDatabase() {
 
     abstract fun albumDao(): AlbumDao

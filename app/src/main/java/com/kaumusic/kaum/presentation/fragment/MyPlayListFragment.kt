@@ -85,13 +85,19 @@ class MyPlayListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.albums.observe(viewLifecycleOwner){
+            binding?.run{
+                recAlbumlist.adapter?.notifyDataSetChanged()
+            }
+        }
+
         viewModel.isGridView.observe(viewLifecycleOwner){isGridView ->
             binding?.recAlbumlist?.run{
                 if (isGridView){
-                    adapter = PlayListAdapter(albumlist)
+                    adapter = PlayListAdapter(viewModel.albums)
                     layoutManager = GridLayoutManager(activity, 2)
                 } else {
-                    adapter = MyLinearListAdapter(albumlist)
+                    adapter = MyLinearListAdapter(viewModel.albums)
                     layoutManager = LinearLayoutManager(activity)
                 } // Make View by Grid if(isGridView) else by Linear
             } // Make RecView of Album list
