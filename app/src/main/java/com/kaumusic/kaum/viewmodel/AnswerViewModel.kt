@@ -3,7 +3,7 @@ package com.kaumusic.mynavapplication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kaumusic.mynavapplication.repository.AnswerRepository
+import com.kaumusic.kaum.repository.AnswerRepository
 
 // defualt answer 설정
 const val UNCHECKED_ANSWER = "yes"

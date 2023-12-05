@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaumusic.kaum.Album
 import com.kaumusic.kaum.Chart
 import com.kaumusic.kaum.repository.MusicRepository
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.selects.select
 
 class MusicViewModel(application: Application) : AndroidViewModel(application) {
     //Repository

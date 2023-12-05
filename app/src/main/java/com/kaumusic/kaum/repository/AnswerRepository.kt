@@ -1,4 +1,4 @@
-package com.kaumusic.mynavapplication.repository
+package com.kaumusic.kaum.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
