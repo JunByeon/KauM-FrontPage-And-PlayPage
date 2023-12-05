@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -55,7 +57,7 @@ class HomeFragment : Fragment() {
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener{
 
             override fun onItemClick(album: Album) {
-                changeAlbumFragment(album)
+                navigateToMyListFragment(album)
             }
 
             override fun onRemoveAlbum(position: Int) {
@@ -94,16 +96,9 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun changeAlbumFragment(album: Album) {
-        (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, AlbumFragment().apply {
-                arguments = Bundle().apply {
-                    val gson = Gson()
-                    val albumJson = gson.toJson(album)
-                    putString("album", albumJson)
-                }
-            })
-            .commitAllowingStateLoss()
+    private fun navigateToMyListFragment(album: Album) {
+        val bundle = bundleOf("Album id" to album.id)
+       findNavController().navigate(R.id.action_homeFragment_to_myListFragment, bundle)
     }
 
     override fun onDestroyView() {
