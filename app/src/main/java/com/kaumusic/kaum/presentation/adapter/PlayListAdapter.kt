@@ -12,7 +12,7 @@ import com.kaumusic.kaum.databinding.ListGridBinding
 import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.domain.Music
 
-class PlayListAdapter(val albumlist: LiveData<ArrayList<Album>>) :
+class PlayListAdapter(val albumlist: LiveData<List<Album>>) :
     RecyclerView.Adapter<PlayListAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -36,7 +36,7 @@ class PlayListAdapter(val albumlist: LiveData<ArrayList<Album>>) :
                 }
 
                 binding.root.setOnClickListener {
-                    val bundle = bundleOf("Album id" to 0)
+                    val bundle = bundleOf("Album id" to albumlist.id)
                     // 1은 임의값, 실제 Album의 id를 넘겨주어야 함.
                     it.findNavController().navigate(R.id.action_myPlayListFragment_to_myListFragment, bundle)
                 }

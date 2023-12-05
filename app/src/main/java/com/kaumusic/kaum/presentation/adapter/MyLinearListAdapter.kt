@@ -13,7 +13,7 @@ import com.kaumusic.kaum.domain.Album
 import com.kaumusic.kaum.domain.Music
 
 
-class MyLinearListAdapter(val albumlist: LiveData<ArrayList<Album>>) :
+class MyLinearListAdapter(val albumlist: LiveData<List<Album>>) :
     RecyclerView.Adapter<MyLinearListAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -22,6 +22,7 @@ class MyLinearListAdapter(val albumlist: LiveData<ArrayList<Album>>) :
     }
 
     override fun getItemCount() = albumlist.value?.size ?: 0
+
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(albumlist.value?.getOrNull(position))

@@ -27,8 +27,8 @@ class MusicViewModel(application: Application) : AndroidViewModel(application) {
     private val _album = MutableLiveData<Album>()
     val album : LiveData<Album> = _album
 
-    private val _albums = MutableLiveData<ArrayList<Album>>()
-    val albums : LiveData<ArrayList<Album>> = _albums
+    private val _albums = MutableLiveData<List<Album>>()
+    val albums : LiveData<List<Album>> = _albums
     // LiveDatas/>
 
 
