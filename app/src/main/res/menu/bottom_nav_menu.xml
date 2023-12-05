@@ -18,13 +18,6 @@
 
         />
     <item
-        android:id="@+id/searchFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_search_24"
-        android:title="SEARCH"
-        />
-    <item
         android:id="@+id/myPlayListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

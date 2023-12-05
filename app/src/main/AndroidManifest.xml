@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".presentation.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name="com.example.flo.SongActivity"
+            android:name=".presentation.activity.SongActivity"
             android:exported="true" />
 
 

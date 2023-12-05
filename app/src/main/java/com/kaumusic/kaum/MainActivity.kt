@@ -1,6 +1,5 @@
 package com.kaumusic.kaum
 
-import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.flo.SongActivity
+import com.kaumusic.kaum.presentation.activity.SongActivity
 //import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
-import com.kaumusic.kaum.ScopeProvider.databaseScope
+import com.kaumusic.kaum.util.ScopeProvider.databaseScope
+import com.kaumusic.kaum.data.db.SongDatabase
 //import com.kaumusic.kaum.SongActivity
 import com.kaumusic.kaum.databinding.ActivityMainBinding
+import com.kaumusic.kaum.domain.Album
+import com.kaumusic.kaum.domain.Song
 import com.kaumusic.kaum.viewmodel.MusicViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -138,8 +140,7 @@ class MainActivity : AppCompatActivity() {
                 200,
                 false,
                 "music_lilac",
-                R.drawable.img_album_exp2,
-                false,
+                R.drawable.img_album_exp2
             )
         )
 
@@ -151,8 +152,7 @@ class MainActivity : AppCompatActivity() {
                 200,
                 false,
                 "music_flu",
-                R.drawable.img_album_exp2,
-                false,
+                R.drawable.img_album_exp2
             )
         )
 
@@ -164,8 +164,7 @@ class MainActivity : AppCompatActivity() {
                 190,
                 false,
                 "music_butter",
-                R.drawable.img_album_exp,
-                false,
+                R.drawable.img_album_exp
             )
         )
 
@@ -177,8 +176,7 @@ class MainActivity : AppCompatActivity() {
                 210,
                 false,
                 "music_next",
-                R.drawable.img_album_exp3,
-                false,
+                R.drawable.img_album_exp3
             )
         )
 
@@ -191,8 +189,7 @@ class MainActivity : AppCompatActivity() {
                 230,
                 false,
                 "music_lilac",
-                R.drawable.img_album_exp4,
-                false,
+                R.drawable.img_album_exp4
             )
         )
 
@@ -205,8 +202,7 @@ class MainActivity : AppCompatActivity() {
                 240,
                 false,
                 "music_bboom",
-                R.drawable.img_album_exp5,
-                false,
+                R.drawable.img_album_exp5
             )
         )
 
