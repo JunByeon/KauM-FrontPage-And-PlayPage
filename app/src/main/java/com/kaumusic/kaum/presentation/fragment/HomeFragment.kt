@@ -27,10 +27,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var songDB: SongDatabase
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,7 +37,6 @@ class HomeFragment : Fragment() {
 
 
         songDB = SongDatabase.getInstance(requireContext())!!
-//        albumDatas.addAll(songDB.albumDao().getAlbums()) // songDB에서 album list를  가져옴
         Log.d("albumlist", albumDatas.toString())
 
 
@@ -94,7 +89,7 @@ class HomeFragment : Fragment() {
 
     private fun navigateToMyListFragment(album: Album) {
         val bundle = bundleOf("Album id" to album.id)
-       findNavController().navigate(R.id.action_homeFragment_to_myListFragment, bundle)
+       findNavController().navigate(R.id.action_homeFragment_to_myListFragment, bundle) // bundle에 album id를 담아서 바로 mylistfragement로 jump 뛴다
     }
 
     override fun onDestroyView() {
