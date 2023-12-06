@@ -13,7 +13,6 @@ import com.kaumusic.kaum.presentation.adapter.MyLinearListAdapter
 import com.kaumusic.kaum.presentation.adapter.PlayListAdapter
 import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.FragmentMyPlayListBinding
-import com.kaumusic.kaum.domain.Music
 import com.kaumusic.kaum.viewmodel.MusicViewModel
 
 class MyPlayListFragment : Fragment() {

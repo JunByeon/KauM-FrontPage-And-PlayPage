@@ -22,10 +22,9 @@ class ChartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChartBinding.inflate(inflater)
+        binding = FragmentChartBinding.inflate(inflater, container, false)
         return binding?.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.chart.observe(viewLifecycleOwner){
@@ -46,10 +45,8 @@ class ChartFragment : Fragment() {
         }// show RecView: chart(Popular) as Vertical View
 
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
-
 }

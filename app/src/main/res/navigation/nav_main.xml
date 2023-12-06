@@ -12,10 +12,12 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment2_to_chartFragment"
-            app:destination="@id/chartFragment" />
+            app:destination="@id/chartFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment2_to_myPlayListFragment"
-            app:destination="@id/myPlayListFragment" />
+            app:destination="@id/myPlayListFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_self2"
             app:destination="@id/homeFragment" />
@@ -24,7 +26,8 @@
             app:destination="@id/resultFragment" />
         <action
             android:id="@+id/action_homeFragment_to_myListFragment"
-            app:destination="@id/myListFragment" />
+            app:destination="@id/myListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/chartFragment"
@@ -33,7 +36,8 @@
         tools:layout="@layout/fragment_chart">
         <action
             android:id="@+id/action_chartFragment_to_myListFragment"
-            app:destination="@id/myListFragment" />
+            app:destination="@id/myListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/myPlayListFragment"
@@ -42,10 +46,12 @@
         tools:layout="@layout/fragment_my_play_list">
         <action
             android:id="@+id/action_myPlayListFragment_to_myListFragment"
-            app:destination="@id/myListFragment" />
+            app:destination="@id/myListFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_myPlayListFragment_self"
-            app:destination="@id/myPlayListFragment" />
+            app:destination="@id/myPlayListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/myListFragment"

@@ -11,7 +11,7 @@ import com.kaumusic.kaum.databinding.ListLinearBinding
 import com.kaumusic.kaum.domain.Song
 import com.kaumusic.kaum.presentation.activity.SongActivity
 
-class MyListAdapter(val musiclist: LiveData<MutableList<Song>>) : RecyclerView.Adapter<MyListAdapter.Holder>() {
+class MyListAdapter(private val musiclist: LiveData<MutableList<Song>>) : RecyclerView.Adapter<MyListAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ListLinearBinding.inflate(LayoutInflater.from(parent.context))
@@ -25,20 +25,19 @@ class MyListAdapter(val musiclist: LiveData<MutableList<Song>>) : RecyclerView.A
     }
 
     class Holder(private val binding: ListLinearBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(musiclist : Song?){
-            musiclist?.let{music ->
+        fun bind(music : Song?){
+            music?.let{elem ->
                 binding.run{
-                    imageView.setImageResource(music.coverImg ?: R.drawable.baseline_album_24)
-                    txtTitle.text = music.title
-                    txtSinger.text = music.singer
+                    imageView.setImageResource(elem.coverImg ?: R.drawable.baseline_album_24)
+                    txtTitle.text = elem.title
+                    txtSinger.text = elem.singer
                 }
+
                 binding.root.setOnClickListener{
                     val intent = Intent(it.context, SongActivity::class.java)
                     startActivity(it.context, intent, null)
                 }
-
             }
-
         }
     }
 }

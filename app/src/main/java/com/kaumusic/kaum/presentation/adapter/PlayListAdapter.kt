@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.ListGridBinding
 import com.kaumusic.kaum.domain.Album
-import com.kaumusic.kaum.domain.Music
 
 class PlayListAdapter(val albumlist: LiveData<List<Album>>) :
     RecyclerView.Adapter<PlayListAdapter.Holder>() {

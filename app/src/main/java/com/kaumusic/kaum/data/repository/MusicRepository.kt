@@ -14,6 +14,7 @@ import org.jsoup.select.Elements
 
 class MusicRepository(application: Application) {
     // <Connection
+
     // URL
     private val latestUrl = "https://www.melon.com/new/index.htm"
     private val popularUrl = "https://www.melon.com/chart/index.htm"
@@ -29,14 +30,19 @@ class MusicRepository(application: Application) {
     suspend fun crawlLatest(): Elements? {
         return withContext(Dispatchers.IO) {
             val doc = Jsoup.connect(latestUrl).get()
-            doc.select("div#songList").select("tbody").select("tr")
+
+            doc.select("div#songList")
+                .select("tbody")
+                .select("tr")
         }
     }
 
     suspend fun crawlChart(): Elements? {
         return withContext(Dispatchers.IO) {
             val doc = Jsoup.connect(popularUrl).get()
-            doc.select("div#tb_list").select("tr.lst50")
+
+            doc.select("div#tb_list")
+                .select("tr.lst50")
         }
     }
 

@@ -11,7 +11,7 @@ import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.ListHorizontalBinding
 import com.kaumusic.kaum.domain.Chart
 
-class LatestChartAdapter(val latestChartlist: LiveData<ArrayList<Chart>>) :
+class LatestChartAdapter(private val latestChartlist: LiveData<ArrayList<Chart>>) :
     RecyclerView.Adapter<LatestChartAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ListHorizontalBinding.inflate(LayoutInflater.from(parent.context))
@@ -26,16 +26,16 @@ class LatestChartAdapter(val latestChartlist: LiveData<ArrayList<Chart>>) :
 
     class Holder(private val binding: ListHorizontalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(latestChartlist: Chart?) {
-            latestChartlist?.let {
+        fun bind(latest: Chart?) {
+            latest?.let {elem ->
                 binding.run {
                     //Initialize coverImg by url else default
                     Glide.with(root)
-                        .load(it.coverImg)
+                        .load(elem.coverImg)
                         .error(R.drawable.baseline_album_24)
                         .into(imgMusic)
-                    txtTitle.text = it.album
-                    txtSinger.text = it.artist
+                    txtTitle.text = elem.album
+                    txtSinger.text = elem.artist
                 }
             }
 
@@ -48,6 +48,5 @@ class LatestChartAdapter(val latestChartlist: LiveData<ArrayList<Chart>>) :
                 )
             }
         }
-
     }
 }

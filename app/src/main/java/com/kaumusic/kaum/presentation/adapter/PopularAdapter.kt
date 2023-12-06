@@ -11,7 +11,7 @@ import com.kaumusic.kaum.R
 import com.kaumusic.kaum.databinding.ListLinearRankedBinding
 import com.kaumusic.kaum.domain.Chart
 
-class PopularAdapter(val popularlist: LiveData<ArrayList<Chart>>) :
+class PopularAdapter(private val popularlist: LiveData<ArrayList<Chart>>) :
     RecyclerView.Adapter<PopularAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ListLinearRankedBinding.inflate(LayoutInflater.from(parent.context))
@@ -23,25 +23,22 @@ class PopularAdapter(val popularlist: LiveData<ArrayList<Chart>>) :
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(popularlist.value?.getOrNull(position))
     }
-
     class Holder(private val binding: ListLinearRankedBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(popularlist: Chart?) {
-            popularlist?.let {
+        fun bind(popular: Chart?) {
+            popular?.let {elem ->
                 binding.run {
                     //Initialize coverImg by url else default
                     Glide.with(root)
-                        .load(it.coverImg)
+                        .load(elem.coverImg)
                         .error(R.drawable.baseline_album_24)
                         .into(imgElbum)
-
                     //text init
-                    txtTitlePopular.text = it.title
-                    txtSingerPopular.text = it.artist
-                    txtRate.text = it.rank
+                    txtTitlePopular.text = elem.title
+                    txtSingerPopular.text = elem.artist
+                    txtRate.text = elem.rank
                 }
             }
-
             binding.root.setOnClickListener {
                 it.context.startActivity(
                     Intent(
